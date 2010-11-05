@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+
+test "$1" = 'configure' || exit 0
+
+add_alternative() {
+  update-alternatives --install \
+      /usr/sbin/policy-rc.d policy-rc.d /usr/sbin/runit-policy-rc.d 10 \
+    --slave \
+      /usr/share/man/man8/policy-rc.d.8.gz policy-rc.d.8.gz \
+        /usr/share/man/man8/runit-policy-rc.d.8.gz
+}
+mv_conffile() {
+  test -e "$1" || return 0
+  echo "Preserving user changes to $2..."
+  mv -f "$2" "$2".dpkg-new
+  mv -f "$1" "$2"
+}
+
+dpkg --compare-versions "$2" ge '0.7.0' ||
+  for i in 2 3 4; do
+    mv_conffile /etc/runit/getty-$i/run /etc/sv/getty-$i/run
+    mv_conffile /etc/runit/getty-$i/finish /etc/sv/getty-$i/finish
+    rmdir /etc/runit/getty-$i 2>/dev/null || :
+  done
+
+if test -d /etc/service && test ! -h /etc/service; then
+  test -z "$(ls -1 /etc/service/)" ||
+    cp -a /etc/service/* /etc/runit/runsvdir/default/
+  rm -rf /etc/service'{old}'
+  mv /etc/service /etc/service'{old}'
+  ln -s /etc/runit/runsvdir/current /etc/service
+fi
+add_alternative

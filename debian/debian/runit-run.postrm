@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+test "$1" = 'remove' || exit 0
+
+remove_diversion() {
+  dpkg-divert --package runit-run --remove --rename \
+    --divert /sbin/init.sysv /sbin/init
+  dpkg-divert --package runit-run --remove --rename \
+    --divert /usr/share/man/man8/init.sysv.8.gz /usr/share/man/man8/init.8.gz
+}
+
+if test -h /etc/service; then
+  rm -f /etc/service
+  if test -e /etc/service'{old}'; then
+    mv /etc/service'{old}' /etc/service
+  else
+    mkdir -p /etc/service
+  fi
+fi
+rm -rf /var/lib/supervise/getty-[234]
+remove_diversion

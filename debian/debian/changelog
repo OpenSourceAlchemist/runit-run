@@ -1,0 +1,191 @@
+runit-run (1.0.0) unstable; urgency=low
+
+  * debian/runit-run.README.Debian, debian/runit-run.preinst: improve
+    instructions on how to switch to runit as pid 1 (thx Joost van
+    Baal).
+  * debian/control: Standards-Version: 3.8.0.1.
+  * debian/copyright: 2008.
+  * debian/implicit: update to revision a09db2e.
+  * debian/rules, debian/INTERFACE.policy-rc.d: minor.
+  * debian/runit-run.postrm: purge: supervise subdirs are now in
+    /var/lib/supervise/.
+
+ -- Gerrit Pape <pape@smarden.org>  Tue, 17 Jun 2008 19:41:23 +0000
+
+runit-run (0.9.1) unstable; urgency=medium
+
+  * 2, 3: Debian's directory for services is now /etc/service/, not
+    /var/service/ (#461478).
+  * debian/control: Standards-Version: 3.7.3.0.
+
+ -- Gerrit Pape <pape@smarden.org>  Wed, 09 Apr 2008 21:21:21 +0000
+
+runit-run (0.9.0) unstable; urgency=low
+
+  * debian/runit-run.postinst, debian/runit-run.postrm,
+    debian/runit-run.prerm: runit's directory for services is now
+    /etc/service/, instead of /var/service/; use the update-service program
+    to add/remove the getty services, instead of dealing with symlinks in
+    /var/service/ directly.
+  * debiab/control: Depends: runit (>= 1.8.0-3) (1st version with
+    /etc/service/).
+  * debian/runit-run.postrm: adapt paths in /var/run/.
+
+ -- Gerrit Pape <pape@smarden.org>  Sun, 24 Feb 2008 15:06:38 +0000
+
+runit-run (0.8.1) unstable; urgency=low
+
+  * debian/control: Depends: initscripts (thx Michael Biebl, closes:
+    #396753).
+
+ -- Gerrit Pape <pape@smarden.org>  Fri,  3 Nov 2006 22:30:12 +0000
+
+runit-run (0.8.0) unstable; urgency=low
+
+  * runit-policy-rc.d: change policy from ``don't run init scripts at all''
+    to ``only run init scripts, if the 'script' is a symbolic link to the sv
+    program'' (closes: #240685).
+  * runit-policy-rc.d.8: adapt.
+  * debian/README.Debian: document new init scripts policy; rename to
+    debian/runit-run.README.Debian.
+  * debian/implicit: update to revision 1.11.
+  * debian/control: Standards-Version: 3.7.2.0.
+  * debian/runit-run.docs: remove debian/README.Debian.
+  * debian/copyright: 2006.
+
+ -- Gerrit Pape <pape@smarden.org>  Sat, 27 May 2006 16:03:46 +0000
+
+runit-run (0.7.0) unstable; urgency=low
+
+  * Makefile, debian/rules, debian/runit-run.conffiles,
+    debian/runit-run.postinst, debian/runit-run.preinst: move
+    /etc/runit/getty-? -> /etc/sv/getty-?.
+  * getty-1, Makefile, debian/rules: add getty-1 service (closes:
+    #353673).
+  * debian/runit-run.conffiles: adapt.
+  * debian/rules: don't include var/run/getty-? directories in package.
+
+ -- Gerrit Pape <pape@smarden.org>  Mon, 20 Mar 2006 19:52:47 +0000
+
+runit-run (0.6.0) unstable; urgency=low
+
+  * getty-2/run, getty-3/run, getty-4/run: use fgetty if available, getty
+    otherwise.
+  * 1: add start argument to /etc/init.s/rmnologin.
+  * 3: use the sv program instead of svwaitdown to shut down services.
+  * ctrlaltdel, runit-policy-rc.d: minor.
+  * debian/control: Depends: runit (>> 1.3.1-0); Recommends: fgetty.
+  * debian/copyright: 2005.
+  * debian/INTERFACE.policy-rc.d: update to current
+    /usr/share/doc/sysv-rc/README.policy-rc.d.gz.
+  * debian/README.Debian: refer to sv program instead of runsvctrl.
+  * debian/control: update description; Standards-Version: 3.6.2.0.
+  * debian/runit-run.prerm: use sv program instead of svwaitdown to shut
+    down getties; typo.
+  * debian/runit-run.postinst: on configure always add diversions and
+    check /var/service.
+
+ -- Gerrit Pape <pape@smarden.org>  Wed, 12 Oct 2005 12:27:02 +0000
+
+runit-run (0.5.0) unstable; urgency=low
+
+  * debian/README.Debian: cleanup; wording.
+  * debian/control: Depends: runit (>> 1.0.5-0); update long description.
+  * debian/copyright: 2001-2004.
+  * debian/implicit: update to revision 1.10.
+  * debian/rules: minor cleanup.
+  * debian/runit-run.postinst, debian/runit-run.postrm,
+    debian/runit-run.preinst, debian/runit-run.prerm: simplify; cleanup.
+  * 2: use -P option to runsvdir.
+
+ -- Gerrit Pape <pape@smarden.org>  Wed, 22 Sep 2004 07:47:25 +0000
+
+runit-run (0.4.1) unstable; urgency=low
+
+  * 1: remove old runit binary after running /etc/init.d/rcS.
+
+ -- Gerrit Pape <pape@smarden.org>  Mon, 29 Dec 2003 15:18:31 +0000
+
+runit-run (0.4.0) unstable; urgency=low
+
+  * debian/control: no longer Build-Depends-Indep: debhelper;
+    Standards-Version: 3.6.1.0.
+  * debian/rules: stop using debhelper, use implicit Makefile rules.
+  * debian/implicit: new; implicit rules.
+  * 1: remove old runit binary on first reboot after upgrade.
+  * debian/runit-run.postinst: check for empty /var/service/ before copying
+    files from there (closes: #224787); cleanup.
+  * debian/runit-run.prerm: take getty services down; minor cleanup.
+  * debian/runit-run.postrm: restore old service directory if it's still
+    available (thx Bastian Kleineidam, closes: #224804); minor cleanup.
+  * debian/runit-run.preinst: minor cleanup.
+  * debian/runit-run.docs: add debian/INTERFACE.policy-rc.d,
+    debian/README.Debian.
+  * debian/runit-run.dirs, debian/runit-run.links: remove; obsolete.
+  * debian/runit-run.conffiles: new.
+
+ -- Gerrit Pape <pape@smarden.org>  Sun, 28 Dec 2003 17:51:52 +0000
+
+runit-run (0.3.1) unstable; urgency=low
+
+  * 3: fix typo.
+
+ -- Gerrit Pape <pape@smarden.org>  Thu, 27 Nov 2003 08:41:15 +0000
+
+runit-run (0.3.0) unstable; urgency=low
+
+  * runit-policy-rc.d, runit-policy-rc.d.8: new; runit's init script
+    policy for invoke-rc.d(8).
+  * debian/INTERFACE.policy-rc.d: new; policy-rc.d interface spec by
+    Henrique de Moraes Holschuh.
+  * debian/runit-run.prerm: new; update-alternatives --remove on
+    remove|deconfigure|failed-upgrade.
+  * Makefile: install runit-policy-rc.d into /usr/sbin/.
+  * ctrlaltdel: typo.
+  * debian/README.Debian: add note about policy-rc.d.
+  * debian/rules: cleanuP, install runit-policy-rc.d.8 man page.
+  * debian/runit-run.dirs: add usr/sbin/.
+  * debian/runit-run.postinst: update-alternatives --install on
+    configure|abort-upgrade.
+
+ -- Gerrit Pape <pape@smarden.org>  Wed,  5 Nov 2003 13:59:13 +0000
+
+runit-run (0.2.4) unstable; urgency=low
+
+  * 3: fix typo.
+
+ -- Gerrit Pape <pape@smarden.org>  Tue, 21 Oct 2003 13:12:15 +0000
+
+runit-run (0.2.3) unstable; urgency=low
+
+  * 1, 3: adapt changes from runit package.
+  * debian/control: Standards-Version: 3.6.0; Depends: runit (>> 0.11.2-0),
+    Depends: sysv-rc instead of sysvinit.
+  * debian/runit-run.dirs: add directories for getty services.
+  * debian/runit-run.links: remove /var/service, now included in the runit
+    package; add links for getty services to /var/run/.
+  * debian/runit-run.postrm: force remove getty service directories in
+    /var/run/ on purge.
+  * debian/runit-run.postinst: save previous /var/service directory to
+    /var/service{old}.
+
+ -- Gerrit Pape <pape@smarden.org>  Thu, 16 Oct 2003 13:48:41 +0000
+
+runit-run (0.2.0) unstable; urgency=low
+
+  * include /etc/runit/{1,2,3,ctrlaltdel} (previously included in the
+    runit package).
+  * debian/control: Standards-Version: 3.5.8; Depends: runit (>> 0.7.2-0);
+    Build-Depends-Indep instead of Build-Depends.
+  * debian/rules: build package in target binary-indep instead of
+    binary-arch; add -n option to dh_installdocs (don't install /usr/doc/
+    link); minor cleanup.
+
+ -- Gerrit Pape <pape@smarden.org>  Wed, 29 Jan 2003 14:23:35 +0100
+
+runit-run (0.1.0) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Gerrit Pape <pape@smarden.org>  Thu, 17 Oct 2002 10:28:56 +0200
+

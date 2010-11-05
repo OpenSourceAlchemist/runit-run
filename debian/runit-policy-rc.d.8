@@ -1,0 +1,62 @@
+.TH runit-policy-rc.d 8
+.SH NAME
+runit-policy-rc.d \- runit's init script policy for invoke-rc.d(8)
+.SH SYNOPSIS
+.B policy-rc.d
+[\-\-quiet]
+.I initscriptID
+.I actions
+[\fIrunlevel\fR]
+.P
+.B policy-rc.d
+\-\-list
+.I initscriptID
+[\fIrunlevel\fR ...]
+.SH DESCRIPTION
+.B policy-rc.d
+is consulted by
+.BR invoke-rc.d (8)
+to determine if a particular init script is to be run or not.
+The
+.BR runit (8)
+Unix init scheme provides service management and service supervision
+through run scripts, and doesn't use SystemV alike init scripts.
+The services are controlled through the
+.BR sv (8)
+program, which optionally can be symlinked to
+.RI /etc/init.d/ initscriptID
+to provide an LSB compatible interface to init script actions.
+.P
+.BR runit-policy-rc.d 's
+policy is to only run init scripts, if the 'script' is a symbolic link to the
+sv program.
+.SH OPTIONS
+.TP
+.B \-\-quiet
+no error messages are generated.
+.TP
+.B \-\-list
+instead of verifying policy, list (in a "human parseable" way) all
+policies defined for the given
+.I initscriptID
+(for all runlevels if no
+.I runlevels
+are specified; otherwise, list it only for the
+.I runlevels
+specified), as well as all known actions and their fallbacks for the
+given
+.I initscriptID
+(note that actions and fallback actions might be global and not
+particular to a single initscript id).
+
+.B runit-policy-rc.d
+always prints ``runit's init script policy is to only run init scripts, if
+the 'script' is a symbolic link to the sv program.'' and the output of
+
+ ls -l /etc/init.d/\fIinitscriptID
+
+.SH SEE ALSO
+invoke-rc.d(8),
+update-rc.d(8),
+sv(8),
+runsv(8)

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+test "$1" = 'remove' || exit 0
+
+remove_alternative() {
+  update-alternatives --remove policy-rc.d /usr/sbin/runit-policy-rc.d
+}
+
+for i in 2 3 4; do
+  update-service --remove /etc/sv/getty-$i || :
+done
+remove_alternative
