@@ -6,7 +6,7 @@
 # Maintainer: Kevin Berry <kb@rubyuists.com>
 pkgname='runit-run-git'
 pkgver=20101107
-pkgrel=1
+pkgrel=2
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
 url="http://github.com/deathsyn/runit-run"
