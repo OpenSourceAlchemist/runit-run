@@ -7,8 +7,8 @@ LAST=0
 test -x /etc/runit/reboot && LAST=6
 
 echo 'Waiting for services to stop...'
-sv -w19 force-stop /service/*
-sv exit /service/*
+sv -w19 force-stop /etc/runit/runsvdir/current/*
+sv exit /etc/runit/runsvdir/current/*
 
 echo 'Shutdown...'
 export RUNLEVEL=$LAST

@@ -9,6 +9,11 @@ if [ -d /etc/runit/runsvdir/$cmdline ];then
 else
   default=default
 fi
+if [ "$default" == "single" ];then
+  rc.single
+else
+  rc.multi
+fi
 runsvchdir $default
 
 exec env - PATH=$PATH \
