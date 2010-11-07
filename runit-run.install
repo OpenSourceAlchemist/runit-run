@@ -3,14 +3,6 @@ post_install() {
   ln -s /sbin/runit-init /sbin/init
   echo "Runit is installed, restart with
         /sbin/init.sysv 6" 
-  post_upgrade
-}
-
-post_upgrade() {
-  chown -R freeswitch:freeswitch /var/{run,spool,log}/freeswitch
-  echo "FreeSWITCH's default configuration available in
-        /usr/share/doc/freeswitch/examples/conf.default, with this package's
-        version in /usr/share/doc/freeswitch/examples/conf.archlinux"
 }
 
 post_remove() {
