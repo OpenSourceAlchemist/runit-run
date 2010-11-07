@@ -1,7 +1,10 @@
 post_install() {
   cp /sbin/init /sbin/init.sysv
   ln -s /sbin/runit-init /sbin/init
-  echo "Runit is installed, restart with
+  ln -sf /etc/runit/runsvdir/runit-run-default /etc/runit/runsvdir/default
+  runsvchdir default
+  ln -s /etc/runit/runsvdir/current /service
+  echo "Runit-run is installed, restart with
         /sbin/init.sysv 6" 
 }
 
