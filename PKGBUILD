@@ -6,7 +6,7 @@
 # Maintainer: Kevin Berry <kb@rubyuists.com>
 pkgname='runit-run-git'
 pkgver=20101107
-pkgrel=2
+pkgrel=3
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
 url="http://github.com/deathsyn/runit-run"
@@ -19,7 +19,7 @@ conflicts=("runit")
 backup=('etc/runit/1' 'etc/runit/2' 'etc/runit/3')
 install='runit-run.install'
 source=('COPYRIGHT')
-md5sums=() #generate with 'makepkg -g'
+md5sums=('00378d23a0f0d8bb6dbc60d9f0578b7c')
 
 _gitroot="https://github.com/deathsyn/runit-run.git"
 _gitname="runit-run"
@@ -49,12 +49,13 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_gitname-build/archlinux"
+  cd "$srcdir/$_gitname-build/"
   install -D -m 0755 etc/runit/1 $pkgdir/etc/runit/1
   install -m 0755 etc/runit/2 $pkgdir/etc/runit/2
   install -m 0755 etc/runit/3 $pkgdir/etc/runit/3
   install -m 0755 etc/runit/ctrlaltdel $pkgdir/etc/runit/ctrlaltdel
   install -d $pkgdir/etc/runit/runsvdir/runit-run-default
+  install -D -m 0755 $srcdir/usr/bin/rsvlog $pkgdir/usr/bin
   install -d $pkgdir/etc/sv
   for service in etc/sv/*;do
     cp -a $service $pkgdir/etc/sv/
