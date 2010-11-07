@@ -10,7 +10,7 @@ pkgrel=2
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
 url="http://github.com/deathsyn/runit-run"
-license=('MIT')
+license=('custom')
 provides=('runit-run')
 depends=('runit-dietlibc')
 makedepends=('git')
@@ -18,7 +18,7 @@ optdepends=('socklog-dietlibc: advanced logging system' 'runit-services: a colle
 conflicts=("runit")
 backup=('etc/runit/1' 'etc/runit/2' 'etc/runit/3')
 install='runit-run.install'
-source=()
+source=('COPYRIGHT')
 md5sums=() #generate with 'makepkg -g'
 
 _gitroot="https://github.com/deathsyn/runit-run.git"
