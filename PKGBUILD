@@ -55,7 +55,7 @@ package() {
   install -m 0755 etc/runit/3 $pkgdir/etc/runit/3
   install -m 0755 etc/runit/ctrlaltdel $pkgdir/etc/runit/ctrlaltdel
   install -d $pkgdir/etc/runit/runsvdir/runit-run-default
-  install -D -m 0755 $srcdir/usr/bin/rsvlog $pkgdir/usr/bin
+  install -D -m 0755 usr/bin/rsvlog $pkgdir/usr/bin/rsvlog
   install -d $pkgdir/etc/sv
   for service in etc/sv/*;do
     cp -a $service $pkgdir/etc/sv/
