@@ -6,7 +6,7 @@
 # Maintainer: Kevin Berry <kb@rubyuists.com>
 pkgname='runit-run-git'
 pkgver=20101107
-pkgrel=3
+pkgrel=4
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
 url="http://github.com/deathsyn/runit-run"
@@ -15,7 +15,6 @@ provides=('runit-run')
 depends=('runit-dietlibc')
 makedepends=('git')
 optdepends=('socklog-dietlibc: advanced logging system' 'runit-services: a collection of commonly used service directories')
-conflicts=("runit")
 backup=('etc/runit/1' 'etc/runit/2' 'etc/runit/3')
 install='runit-run.install'
 source=('COPYRIGHT')
