@@ -1,7 +1,9 @@
 post_install() {
   echo "Creating agetty services on tty2 and tty3"
   /etc/sv/agetty-generic/mksv 2
+  ln -s /etc/sv/agetty-tty2 /etc/runit/runsvidr/runit-run-default
   /etc/sv/agetty-generic/mksv 3
+  ln -s /etc/sv/agetty-tty3 /etc/runit/runsvidr/runit-run-default
   echo "Moving /sbin/init to /sbin/init.sysv"
   cp /sbin/init /sbin/init.sysv
   echo "Linking /sbin/init to /sbin/runit-init"

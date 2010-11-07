@@ -59,8 +59,6 @@ package() {
   for service in etc/sv/*;do
     cp -a $service $pkgdir/etc/sv/
   done
-  ln -s /etc/sv/agetty-tty2 $pkgdir/etc/runit/runsvdir/runit-run-default/
-  ln -s /etc/sv/agetty-tty3 $pkgdir/etc/runit/runsvdir/runit-run-default/
   ln -s /etc/sv/syslog-ng $pkgdir/etc/runit/runsvdir/runit-run-default/
   ln -s /etc/sv/cron $pkgdir/etc/runit/runsvdir/runit-run-default/
 } 
