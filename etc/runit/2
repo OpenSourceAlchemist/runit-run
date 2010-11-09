@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=/command:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
 
 cmdline=$(awk '{print $(NF)}' /proc/cmdline)
 
@@ -10,9 +10,9 @@ else
   default=default
 fi
 if [ "$default" == "single" ];then
-  rc.single
+  /etc/rc.single
 else
-  rc.multi
+  /etc/rc.multi
 fi
 runsvchdir $default
 
