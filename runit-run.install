@@ -5,7 +5,7 @@ post_install() {
   /etc/sv/agetty-generic/mksv 3
   ln -s /etc/sv/agetty-tty3 /etc/runit/runsvdir/runit-run-default
   echo "Moving /sbin/init to /sbin/init.sysv"
-  cp /sbin/init /sbin/init.sysv
+  mv /sbin/init /sbin/init.sysv
   echo "Linking /sbin/init to /sbin/runit-init"
   ln -s /sbin/runit-init /sbin/init
   echo "Linking /etc/runit/runsvdir/default to /etc/runit/runsvdir/runit-run-default"
