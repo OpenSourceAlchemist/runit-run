@@ -1,13 +1,8 @@
 post_install() {
-  echo "Creating agetty services on tty2 and tty3"
-  /etc/sv/agetty-generic/mksv 2
-  ln -s /etc/sv/agetty-tty2 /etc/runit/runsvdir/runit-run-default
-  /etc/sv/agetty-generic/mksv 3
-  ln -s /etc/sv/agetty-tty3 /etc/runit/runsvdir/runit-run-default
   echo "Moving /sbin/init to /sbin/init.sysv"
   mv /sbin/init /sbin/init.sysv
-  echo "Linking /sbin/init to /sbin/runit-init"
-  ln -s /sbin/runit-init /sbin/init
+  echo "Linking /sbin/init to runit-init"
+  ln -s runit-init /sbin/init
   echo "Linking /etc/runit/runsvdir/default to /etc/runit/runsvdir/runit-run-default"
   ln -sf /etc/runit/runsvdir/runit-run-default /etc/runit/runsvdir/default
   echo "Changing runsvdir to /etc/runit/runsvdir/default"
@@ -15,7 +10,7 @@ post_install() {
   echo "Linking /service to /etc/runit/runsvdir/current"
   ln -s /etc/runit/runsvdir/current /service
   echo "Runit-run is installed, restart with
-        /sbin/init.sysv 6" 
+        /sbin/init.sysv 6." 
 }
 
 post_remove() {

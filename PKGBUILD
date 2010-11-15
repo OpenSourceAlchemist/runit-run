@@ -5,7 +5,7 @@
 
 # Maintainer: Kevin Berry <kb@rubyuists.com>
 pkgname='runit-run-git'
-pkgver=20101109
+pkgver=20101115
 pkgrel=1
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
@@ -54,11 +54,19 @@ package() {
   install -m 0755 etc/runit/3 $pkgdir/etc/runit/3
   install -m 0755 etc/runit/ctrlaltdel $pkgdir/etc/runit/ctrlaltdel
   install -d $pkgdir/etc/runit/runsvdir/runit-run-default
+  install -d $pkgdir/etc/runit/runsvdir/archlinux-default
   install -D -m 0755 usr/bin/rsvlog $pkgdir/usr/bin/rsvlog
+  install -D -m 0644 README.runit-run $pkgdir/usr/share/doc/runit-run/README
   install -d $pkgdir/etc/sv
   for service in etc/sv/*;do
     cp -a $service $pkgdir/etc/sv/
   done
-  ln -s /etc/sv/syslog-ng $pkgdir/etc/runit/runsvdir/runit-run-default/
-  ln -s /etc/sv/cron $pkgdir/etc/runit/runsvdir/runit-run-default/
+  ln -s /etc/sv/agetty-tty2 $pkgdir/etc/runit/runsvdir/runit-run-default
+  ln -s /etc/sv/agetty-tty3 $pkgdir/etc/runit/runsvdir/runit-run-default
+  for s in $(seq 1 6);do
+    ln -s /etc/sv/agetty-tty${s} $pkgdir/etc/runit/runsvdir/archlinux-default
+  done
+    
+  ln -s /etc/sv/syslog-ng $pkgdir/etc/runit/runsvdir/archlinux-default/
+  ln -s /etc/sv/cron $pkgdir/etc/runit/runsvdir/archlinux-default/
 } 
