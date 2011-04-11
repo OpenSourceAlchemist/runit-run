@@ -3,9 +3,9 @@
 # smarden.org/runit for more information.
 
 
-# Maintainer: Kevin Berry <kb@rubyuists.com>
+# Maintainer: Kevin Berry <kb@rubyists.com>
 pkgname='runit-run-git'
-pkgver=20101115
+pkgver=20110411
 pkgrel=2
 pkgdesc="A SysV replacement init scheme with parallel start-up and flexible service directories"
 arch=('i686' 'x86_64')
