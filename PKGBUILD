@@ -20,7 +20,7 @@ install='runit-run.install'
 source=('COPYRIGHT')
 md5sums=('00378d23a0f0d8bb6dbc60d9f0578b7c')
 
-_gitroot="https://github.com/rubyists/runit-run.git"
+_gitroot="git://github.com/rubyists/runit-run.git"
 _gitname="runit-run"
 
 build() {
