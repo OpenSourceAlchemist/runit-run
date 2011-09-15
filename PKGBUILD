@@ -37,8 +37,6 @@ build() {
   msg "GIT checkout done or server timeout"
   msg "Starting make..."
 
-  cd "$srcdir/$_gitname-build"
-
   #
   # BUILD HERE
   #
@@ -46,7 +44,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_gitname-build/"
+  cd "$srcdir/$_gitname/"
   install -D -m 0755 etc/runit/1 $pkgdir/etc/runit/1
   install -m 0755 etc/runit/2 $pkgdir/etc/runit/2
   install -m 0755 etc/runit/3 $pkgdir/etc/runit/3
