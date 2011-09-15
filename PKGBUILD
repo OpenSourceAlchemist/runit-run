@@ -35,12 +35,6 @@ build() {
   fi
 
   msg "GIT checkout done or server timeout"
-  msg "Starting make..."
-
-  #
-  # BUILD HERE
-  #
-
 }
 
 package() {
