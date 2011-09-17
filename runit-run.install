@@ -1,4 +1,5 @@
 post_install() {
+<<<<<<< HEAD
   if [ ! -f /sbin/init.sysv ];then
     echo "Moving /sbin/init to /sbin/init.sysv"
     mv /sbin/init /sbin/init.sysv
@@ -20,6 +21,11 @@ post_install() {
     ln -sf /etc/runit/runsvdir/runit-run-default /etc/runit/runsvdir/default
   fi
 
+=======
+  post_upgrade
+  echo "Linking /etc/runit/runsvdir/default to /etc/runit/runsvdir/runit-run-default"
+  ln -sf /etc/runit/runsvdir/runit-run-default /etc/runit/runsvdir/default
+>>>>>>> 4eba5ca1d25fed66c15f68e2964d76f9c63a450b
   echo "Changing runsvdir to /etc/runit/runsvdir/default"
   runsvchdir default
 
@@ -30,6 +36,15 @@ post_install() {
 
   echo "Runit-run is installed, restart with
         /sbin/init.sysv 6." 
+}
+
+post_upgrade() {
+  if [ ! -L /sbin/init ];then
+    echo "Moving /sbin/init to /sbin/init.sysv"
+    mv /sbin/init /sbin/init.sysv
+  fi
+  echo "Linking /sbin/init to runit-init"
+  ln -sf runit-init /sbin/init
 }
 
 post_remove() {

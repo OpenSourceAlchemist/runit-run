@@ -12,7 +12,7 @@ arch=('i686' 'x86_64')
 url="http://github.com/rubyists/runit-run"
 license=('custom')
 provides=('runit-run')
-depends=('runit-dietlibc')
+depends=('runit-dietlibc fgetty')
 makedepends=('git')
 optdepends=('socklog-dietlibc: advanced logging system' 'runit-services: a collection of commonly used service directories')
 backup=('etc/runit/1' 'etc/runit/2' 'etc/runit/3')
@@ -50,9 +50,11 @@ package() {
   for service in etc/sv/*;do
     cp -a $service $pkgdir/etc/sv/
   done
-  ln -s /etc/sv/agetty-tty2 $pkgdir/etc/runit/runsvdir/runit-run-default
-  ln -s /etc/sv/agetty-tty3 $pkgdir/etc/runit/runsvdir/runit-run-default
-  for s in $(seq 1 6);do
+  ln -s /etc/sv/fgetty-tty2 $pkgdir/etc/runit/runsvdir/runit-run-default
+  ln -s /etc/sv/fgetty-tty3 $pkgdir/etc/runit/runsvdir/runit-run-default
+  ln -s /etc/sv/fgetty-tty2 $pkgdir/etc/runit/runsvdir/archlinux-default
+  ln -s /etc/sv/fgetty-tty3 $pkgdir/etc/runit/runsvdir/archlinux-default
+  for s in 1 4 5 6;do
     ln -s /etc/sv/agetty-tty${s} $pkgdir/etc/runit/runsvdir/archlinux-default
   done
     
