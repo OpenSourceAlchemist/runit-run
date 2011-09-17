@@ -14,7 +14,9 @@ license=('custom')
 provides=('runit-run')
 depends=('runit-dietlibc fgetty')
 makedepends=('git')
-optdepends=('socklog-dietlibc: advanced logging system' 'runit-services: a collection of commonly used service directories')
+optdepends=('socklog-dietlibc: advanced logging system' 
+            'sv-helper: Wrapper for easy service management'
+            'runit-services: a collection of commonly used service directories')
 backup=('etc/runit/1' 'etc/runit/2' 'etc/runit/3')
 install='runit-run.install'
 source=('COPYRIGHT')
