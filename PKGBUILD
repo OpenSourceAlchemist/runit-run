@@ -72,3 +72,5 @@ package() {
   ln -s /etc/sv/syslog-ng $pkgdir/etc/runit/runsvdir/archlinux-default/
   ln -s /etc/sv/cron $pkgdir/etc/runit/runsvdir/archlinux-default/
 } 
+md5sums=('00378d23a0f0d8bb6dbc60d9f0578b7c')
+md5sums=('00378d23a0f0d8bb6dbc60d9f0578b7c')
