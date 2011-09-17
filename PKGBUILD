@@ -55,7 +55,6 @@ package() {
   install -m 0755 etc/runit/ctrlaltdel $pkgdir/etc/runit/ctrlaltdel
   install -d $pkgdir/etc/runit/runsvdir/runit-run-default
   install -d $pkgdir/etc/runit/runsvdir/archlinux-default
-  install -D -m 0755 usr/bin/rsvlog $pkgdir/usr/bin/rsvlog
   install -D -m 0644 README.runit-run $pkgdir/usr/share/doc/runit-run/README
   install -d $pkgdir/etc/sv
   for service in etc/sv/*;do
